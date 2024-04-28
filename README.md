@@ -1,18 +1,5 @@
-# Svelte Template using Typescript
+# ED Journal Anonymizer
 
-I made this template more or less for myself, but feel free to use it. To install this template in your correct 
-directory, run:
+A small application to anonymize your Elite Dangerous journals.
 
-```bash
-npx degit rster2002/svelte-template#typescript .
-```
-
-## Features
-
-This template comes pre-configured with:
-
-* ⚡️ Vite for lightning fast development;
-* 💪 Typescript for strongly typed code;
-* 🗺 Alias for the 'src' directory using '@';
-* 🎨 SCSS for easy styling;
-* 🔀 Cross-env for development on Windows machines.
+Version can be found online at [rster2002.github.io/ed-log-anonymizer](https://rster2002.github.io/ed-log-anonymizer).
