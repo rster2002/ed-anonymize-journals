@@ -5,6 +5,12 @@
     {#if !working}
       <input bind:this={fileEl} type="file" multiple />
 
+      {#if errorMessage.length > 0}
+        <p>
+          {errorMessage}
+        </p>
+      {/if}
+
       <button on:click={performAnonymization}>
         Anonymize
       </button>
@@ -21,6 +27,7 @@ import JSZip from "jszip";
 
 let working = false;
 let fileEl: HTMLInputElement;
+let errorMessage = "";
 
 async function performAnonymization() {
   working = true;
@@ -53,7 +60,7 @@ async function performAnonymization() {
       elem.click()
     });
   } catch (e) {
-
+    errorMessage = e.toString();
   } finally {
     working = false;
   }
