@@ -85,7 +85,7 @@ async function processFile(file: File) {
         return {
           ...line,
           FID: "F123456789",
-          Name: "TEST",
+          Commander: "TEST",
         };
       }
 
@@ -109,6 +109,14 @@ async function processFile(file: File) {
           ...line,
           From: "SOME SENDER",
           Message: "Some awesome message that is just to cool to show.",
+        };
+      }
+
+      if (line.event === "ShipTargeted" && line.PilotName !== undefined && line.PilotName.startsWith("$RolePanel2_unmanned;")) {
+        return {
+          ...line,
+          PilotName: "$RolePanel2_unmanned; $cmdr_decorate:#name=SOMEONE;",
+          PilotName_Localised: "unmanned CMDR SOMEONE",
         };
       }
 
