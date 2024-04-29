@@ -2,7 +2,14 @@
   <section>
     <h1>Anonymize journals</h1>
 
+    <p>
+      Replaces identifying information like CMDR name and Frontier ID with generic values so you can contribute your
+      journal files to the project.
+    </p>
+
     {#if !working}
+      <input bind:value={commanderName} type="text" placeholder="CMDR name (without CMDR prefix)" />
+
       <input bind:this={fileEl} type="file" multiple />
 
       {#if errorMessage.length > 0}
@@ -25,6 +32,7 @@
 <script lang="ts">
 import JSZip from "jszip";
 
+let commanderName = "";
 let working = false;
 let fileEl: HTMLInputElement;
 let errorMessage = "";
@@ -71,6 +79,7 @@ async function processFile(file: File) {
 
   return contents.split("\n")
     .filter(line => line.trim().length > 0 && !line.includes("\0"))
+    .map(line => line.split(commanderName.toUpperCase()).join("SOMECOMMANDER"))
     .map(line => JSON.parse(line.trim()))
     .map(line => {
       if (line.event === "Commander") {
@@ -159,13 +168,14 @@ main {
 }
 
 section {
-    background-color: #0f0f0f;
+    max-width: 26rem;
 
     display: flex;
     flex-direction: column;
     gap: 2rem;
     padding: 2rem;
 
+    background-color: #0f0f0f;
     border-radius: 0.5rem;
     color: white;
 }
