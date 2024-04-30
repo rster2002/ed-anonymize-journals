@@ -129,6 +129,20 @@ async function processFile(file: File) {
         };
       }
 
+      if (line.event === "WingInvite" || line.event === "WingAdd") {
+        return {
+          ...line,
+          Name: "INVITATION_CMDR",
+        };
+      }
+
+      if (line.event === "WingJoin") {
+        return {
+          ...line,
+          Others: line.others.map(() => "OTHER CMDR"),
+        }
+      }
+
       return line;
     })
     .map(line => JSON.stringify(line))
