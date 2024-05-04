@@ -7,6 +7,24 @@
       journal files to the project.
     </p>
 
+    <p>
+      Things that will be anonymized:
+    </p>
+
+    <ol>
+      <li>Your commander name</li>
+      <li>Your Frontier ID</li>
+      <li>The names of your friends in friend-related events</li>
+      <li>Contents of sent and received messages to and from players and their names</li>
+      <li>Names from wing related events</li>
+    </ol>
+
+    <p>
+      Note that this website will NOT anonymize the things like which systems you've visited and your flight log because
+      it's very difficult to determine which names to remove and which to keep. Because your commander name is anonymize
+      it shouldn't be an issue, but it's important to mention.
+    </p>
+
     {#if !working}
       <input bind:value={commanderName} type="text" placeholder="CMDR name (without CMDR prefix)" />
 
@@ -118,14 +136,6 @@ async function processFile(file: File) {
           ...line,
           From: "SOME SENDER",
           Message: "Some awesome message that is just to cool to show.",
-        };
-      }
-
-      if (line.event === "ShipTargeted" && line.PilotName !== undefined && line.PilotName.startsWith("$RolePanel2_unmanned;")) {
-        return {
-          ...line,
-          PilotName: "$RolePanel2_unmanned; $cmdr_decorate:#name=SOMEONE;",
-          PilotName_Localised: "unmanned CMDR SOMEONE",
         };
       }
 
