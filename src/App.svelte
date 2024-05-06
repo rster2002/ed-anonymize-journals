@@ -16,7 +16,8 @@
       <li>Your Frontier ID</li>
       <li>The names of your friends in friend-related events</li>
       <li>Contents of sent and received messages to and from players and their names</li>
-      <li>Names from wing related events</li>
+      <li>CMDR names from wing related events</li>
+      <li>CMDR names from multi-crew related events</li>
     </ol>
 
     <p>
@@ -150,6 +151,31 @@ async function processFile(file: File) {
         return {
           ...line,
           Others: line.others.map(() => "OTHER CMDR"),
+        }
+      }
+
+      if (line.event === "CrewLaunchFighter"
+        || line.event === "CrewMemberJoins"
+        || line.event === "CrewMemberQuits"
+        || line.event === "CrewMemberRoleChange"
+      ) {
+        return {
+          ...line,
+          Name: "MULTICREW CREW"
+        };
+      }
+
+      if (line.event === "JoinACrew" || line.event === "QuitACrewEvent") {
+        return {
+          ...line,
+          Captain: "MULTICREW CAPTAIN",
+        }
+      }
+
+      if (line.event === "KickCrewMemberEvent") {
+        return {
+          ...line,
+          Crew: "MULTICREW CREW",
         }
       }
 
